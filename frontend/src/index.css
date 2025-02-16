@@ -1,3 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+
+
+/* Default Light Mode */
+html  {
+    @apply bg-gray-900 text-white transition-colors duration-300;
+}
+
+/* Dark Mode */
+  html.dark {
+    @apply bg-gradient-to-r from-violet-200 to-pink-200 text-black ;
+}
+
