@@ -8,6 +8,7 @@ import {
     PackageIcon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import AddProductModel from "../components/AddProductModel";
 
 const HomePage = () => {
     const { products, loading, error, fetchProducts,deleteProduct } = useProductStore();
@@ -18,15 +19,20 @@ const HomePage = () => {
     return (
         <main className="max-w-6xl mx-auto px-4 py-8 mt-8">
             <div className="flex justify-between items-center mb-8">
-                <button className="cursor-pointer border border-teal-500 bg-teal-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-teal-600 focus:outline-none focus:shadow-outline flex gap-2">
-                    <CirclePlus />
-                    Add Product
-                </button>
+            <button
+  onClick={() => document.getElementById("add_product_modal").classList.remove("hidden")}
+  className="cursor-pointer border border-teal-500 bg-teal-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-teal-600 focus:outline-none focus:shadow-outline flex gap-2"
+>
+  <CirclePlus />
+  Add Product
+</button>
+
                 {/* Refetch */}
                 <button onClick={fetchProducts} className="cursor-pointer">
                     <RefreshCcw />
                 </button>
             </div>
+            <AddProductModel />
             {error && (
                 <div className="text-black-500 flex-1 bg-red-400 py-2 px-6 text-center">
                     {error}
