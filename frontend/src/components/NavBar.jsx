@@ -3,7 +3,7 @@ import { Link, useResolvedPath } from "react-router-dom";
 import { ShoppingBag, SunMedium, Moon } from "lucide-react";
 
 const NavBar = () => {
-    const { pathname } = useResolvedPath();
+    const { pathname} = useResolvedPath();
     const isHomePage = pathname !== "/";
 
     // Get theme from localStorage or system preference
@@ -63,7 +63,7 @@ const NavBar = () => {
                             <div className="relative rounded-full bg-neutral-200 dark:bg-gray-700 flex items-center p-2">
                                 <ShoppingBag className="text-black dark:text-white transition-colors duration-300" />
                                 <span className="absolute top-0 right-0 transform ml-2 translate-x-1/2 -translate-y-1/2 text-black dark:text-white rounded-full text-xs font-bold flex items-center justify-center">
-                                    9
+                                    7
                                 </span>
                             </div>
                         )}
