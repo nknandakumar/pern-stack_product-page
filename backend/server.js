@@ -3,6 +3,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path"; 
 //Routes
 import productRoutes from "./routes/productRoutes.js";
 import { sql } from "./config/db.js";
@@ -11,10 +12,12 @@ import { aj } from "./lib/arcjet.js";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+const __dirname = path.resolve();
 app.use(express.json());
 app.use(cors()); 
-app.use(helmet()); // helmet is a security middleware that helps you protect your app by setting various HTTP headers
+app.use(helmet({
+	contentSecurityPolicy:false, 
+})); // helmet is a security middleware that helps you protect your app by setting various HTTP headers
 app.use(morgan("dev")); // log the requests
 
 //apply rate limiting to all routes
@@ -46,6 +49,16 @@ app.use(async (req,res,next)=>{
 
 //Route
 app.use("/api/products",productRoutes);
+
+if (process.env.NODE_ENV === "production") {
+	// server our react app
+	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  
+	app.get("*", (req, res) => {
+	  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+	});
+}  
+
 
 const initDB = async()=>{
 try {
